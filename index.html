@@ -1,0 +1,41 @@
+<!DOCTYPE <!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body class="body">
+    <header class="header">
+      <h1 class="header--heading">ToDo List 2018</h1>
+    </header>
+    <div class="container">
+      <div class="input">
+        <input class="js-add-input input--text" type="text" name="" id="create-todo" value="" placeholder="Type a todo" />
+        <button class="js-add-btn input--button" type="button">Add</button>
+      </div>
+
+      <div class="output">
+        <ul class="list">
+          <li class="task">
+            <button class="js-toggle-btn task--btn mark-toggle active-green">Mark</button>
+            <span class="js-task-title task--title">Boil Eggs</span>
+            <button class="js-edit-btn task--btn edit dark-green" type="button">Edit</button>
+            <button class="js-delete-btn task--btn delete red" type="button">Delete</button>
+          </li>
+          <li class="js-marked-done task grey">
+            <button class="js-toggle-btn task--btn mark-toggle red">Unmark</button>
+            <span class="js-task-title task--title">Get a massage Get a massage Get a massage Get a massage</span>
+            <button class="js-edit-btn task--btn btn-disabled" type="button" disabled>Edit</button>
+            <button class="js-delete-btn task--btn btn-disabled" type="button" disabled>Delete</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+
+</html>

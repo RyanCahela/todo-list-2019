@@ -1,0 +1,144 @@
+/* Styles go here */
+.body {
+  background-color: #dddfd4;
+  padding: 0;
+  margin: 0;
+  min-width: 500px;
+}
+
+.container {
+  margin: 0 auto;
+  width: 75%;
+  border: 3px solid #3fb0ac;
+  padding: 20px;
+  min-width: 500px;
+
+}
+
+
+/******************************
+BASIC STATE
+*******************************/
+
+.edit {
+  color: white;
+
+}
+
+
+.header {
+  background-color: #212121;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.header--heading {
+  text-align: center;
+  color: #FAFAFA;
+  margin: 0;
+}
+
+.input {
+  outline: none;
+}
+
+.input--text {
+  outline: inherit;
+}
+
+.input--button {
+  outline: inherit;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  box-shadow: 0 10px 6px -6px #777;
+  margin: 10px 0;
+  background-color: #3fb0ac;
+  cursor: default;
+  transition-property: background-color,box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+
+.task--btn {
+  outline: none;
+  cursor: pointer;
+  width: 70px;
+  border: none;
+}
+
+.task--btn:active {
+  transform:scale(0.99);
+}
+
+.task--title {
+  flex-basis: 50%;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+/*************************
+UNACTIVE STATE
+***************************/
+.btn-disabled {
+  cursor: not-allowed;
+  padding: 0;
+  pointer-events: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+.flatten {
+  box-shadow: 0 5px 3px -3px #777;
+
+}
+
+.grey {
+  background-color: grey;
+  box-shadow:0 6px 6px -6px #777;
+}
+
+
+
+
+
+/**************************
+COLORS
+***************************/
+
+.active-green {
+  background-color: #AED581;
+
+}
+
+.dark-green {
+  background-color: #173e43;
+
+}
+
+.red {
+  background-color:#e57373;
+
+}
+
+.yellow {
+  background-color: #fae596;
+}
