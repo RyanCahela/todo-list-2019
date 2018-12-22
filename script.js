@@ -1,3 +1,8 @@
+"use strict";
+(function(){
+
+  let tasksArray = null;
+
 
 //   /\/\   ___   __| | ___| |
 //  /    \ / _ \ / _` |/ _ \ |
@@ -84,9 +89,6 @@ const assignListenersToList = function(listArray) {
     });
   });
 }
-
-let taskList = getDOMTasks();
-assignListenersToList(taskList);
 
 const toggleTaskCSS = function(taskEl) {
   if(taskEl.classList.contains('js-marked-done')) {
@@ -208,13 +210,13 @@ const markTaskNotDone = function(taskEl) {
 }
 
 // ______   ______   .__   __. .___________..______        ______    __       __       _______ .______
-// /      | /  __  \  |  \ |  | |           ||   _  \      /  __  \  |  |     |  |     |   ____||   _  \
+//  /      | /  __  \  |  \ |  | |           ||   _  \      /  __  \  |  |     |  |     |   ____||   _  \
 // |  ,----'|  |  |  | |   \|  | `---|  |----`|  |_)  |    |  |  |  | |  |     |  |     |  |__   |  |_)  |
 // |  |     |  |  |  | |  . `  |     |  |     |      /     |  |  |  | |  |     |  |     |   __|  |      /
 // |  `----.|  `--'  | |  |\   |     |  |     |  |\  \----.|  `--'  | |  `----.|  `----.|  |____ |  |\  \----.
-// \______| \______/  |__| \__|     |__|     | _| `._____| \______/  |_______||_______||_______|| _| `._____|
+//  \______| \______/  |__| \__|     |__|     | _| `._____| \______/  |_______||_______||_______|| _| `._____|
 //
-
+//Grab all elements
 const addBtn = document.querySelector('.js-add-btn');
 const taskUL = document.querySelector('.list');
 
@@ -250,15 +252,27 @@ const createNewTask = function(titleText){
 
 addBtn.addEventListener('click',function(e){
 
-  taskList = getDOMTasks();
-  assignListenersToList(taskList);
+  tasksArray = getDOMTasks();
+  assignListenersToList(tasksArray);
 
   let titleText = document.querySelector('.js-add-input').value;
   console.log(titleText);
   let newTask = createNewTask(titleText);
   taskUL.appendChild(newTask);
 
-  taskList = getDOMTasks();
-  assignListenersToList(taskList);
+  tasksArray = getDOMTasks();
+  assignListenersToList(tasksArray);
 
 });
+
+const init = function() {
+  tasksArray = getDOMTasks();
+  assignListenersToList(tasksArray);
+}
+
+
+init();
+
+
+
+})();
