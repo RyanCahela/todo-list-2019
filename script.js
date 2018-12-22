@@ -86,16 +86,25 @@ const assignListenersToList = function(listArray) {
         let taskBeingClicked = this;
         toggleTaskCSS(taskBeingClicked);
       }
+
+      if(e.target.classList.contains('js-delete-btn')) {
+        let taskBeingClicked = this;
+        deleteFromDOM(taskBeingClicked);
+      }
     });
   });
 }
 
-const toggleTaskCSS = function(taskEl) {
-  if(taskEl.classList.contains('js-marked-done')) {
-    markTaskNotDone(taskEl);
+const toggleTaskCSS = function(task) {
+  if(task.classList.contains('js-marked-done')) {
+   markTaskIncomplete(task);
   } else {
-    markTaskDone(taskEl);
+    markTaskDone(task);
   }
+}
+
+const deleteFromDOM = function(task) {
+  task.remove();
 }
 
 
@@ -182,31 +191,36 @@ const getTaskBtns = function(el) {
   }
 }
 //MARK TASK DONE
-const markTaskDone = function(taskEl) {
+const markTaskDone = function(task) {
   //add js-marked-done class
-  taskEl.classList.add('js-marked-done');
+  task.classList.add('js-marked-done');
   //add grey class to task el
-  taskEl.classList.add("grey");
+  task.classList.add("grey");
 
-  let taskBtns = getTaskBtns(taskEl);
+  let taskBtns = getTaskBtns(task);
   markToggleBtn(taskBtns.toggleBtn);
   disableEditBtn(taskBtns.editBtn);
   disableDeleteBtn(taskBtns.deleteBtn);
 }
 
 //MARK TASK NOT DONE
-const markTaskNotDone = function(taskEl) {
+const markTaskIncomplete = function(task) {
 
   //remove js-marked-done class
-  taskEl.classList.remove('js-marked-done');
+  task.classList.remove('js-marked-done');
   //add grey class to task el
-  taskEl.classList.remove("grey");
+  task.classList.remove("grey");
 
-  let taskBtns = getTaskBtns(taskEl);
+  let taskBtns = getTaskBtns(task);
 
   unmarkToggleBtn(taskBtns.toggleBtn);
   enableEditBtn(taskBtns.editBtn);
   enableDeleteBtn(taskBtns.deleteBtn);
+}
+
+
+const prependToList = function() {
+
 }
 
 // ______   ______   .__   __. .___________..______        ______    __       __       _______ .______
@@ -216,9 +230,10 @@ const markTaskNotDone = function(taskEl) {
 // |  `----.|  `--'  | |  |\   |     |  |     |  |\  \----.|  `--'  | |  `----.|  `----.|  |____ |  |\  \----.
 //  \______| \______/  |__| \__|     |__|     | _| `._____| \______/  |_______||_______||_______|| _| `._____|
 //
-//Grab all elements
+//DOM cache
 const addBtn = document.querySelector('.js-add-btn');
 const taskUL = document.querySelector('.list');
+const newTaskInput = document.querySelector('.js-add-input');
 
 const createNewTask = function(titleText){
   //create all elements in a task
@@ -251,15 +266,24 @@ const createNewTask = function(titleText){
 }
 
 addBtn.addEventListener('click',function(e){
+  //if input empty return without doing anything
+  if(!newTaskInput.value) {
+    return;
+  }
 
-  tasksArray = getDOMTasks();
-  assignListenersToList(tasksArray);
+  //grab value from add task input the reset field
+  let titleText = newTaskInput.value;
+  newTaskInput.value = "";
 
-  let titleText = document.querySelector('.js-add-input').value;
-  console.log(titleText);
+  
+
+
   let newTask = createNewTask(titleText);
-  taskUL.appendChild(newTask);
 
+  //prepend new task to list
+  taskUL.prepend(newTask);
+
+  //create new taskArray with new task included
   tasksArray = getDOMTasks();
   assignListenersToList(tasksArray);
 
