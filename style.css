@@ -20,11 +20,6 @@
 BASIC STATE
 *******************************/
 
-.edit {
-  color: white;
-
-}
-
 
 .header {
   background-color: #212121;
@@ -61,11 +56,18 @@ BASIC STATE
   padding: 20px;
   box-shadow: 0 10px 6px -6px #777;
   margin: 10px 0;
-  background-color: #3fb0ac;
+  background-color: #0288D1;
   cursor: default;
   transition-property: background-color,box-shadow;
   transition-duration: 0.3s;
   transition-timing-function: ease;
+}
+
+.task * {
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+
 }
 
 
@@ -78,6 +80,11 @@ BASIC STATE
 
 .task--btn:active {
   transform:scale(0.99);
+}
+
+.task-edit-input {
+  flex-basis: 50%;
+  text-align: center;
 }
 
 .task--title {
@@ -99,11 +106,6 @@ UNACTIVE STATE
 ***************************/
 .btn-disabled {
   cursor: not-allowed;
-  padding: 0;
-  pointer-events: none;
-  transition-property: background-color;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
 }
 
 .flatten {
@@ -116,6 +118,10 @@ UNACTIVE STATE
   box-shadow:0 6px 6px -6px #777;
 }
 
+.hidden {
+  display: none;
+}
+
 
 
 
@@ -125,13 +131,18 @@ COLORS
 ***************************/
 
 .active-green {
-  background-color: #AED581;
+  background-color: #81C784;
 
 }
 
 .dark-green {
-  background-color: #173e43;
+  background-color: #004D40;
+  color: white;
 
+}
+
+.light-green {
+  background-color: #4DB6AC;
 }
 
 .red {
