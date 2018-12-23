@@ -1,6 +1,6 @@
 /* Styles go here */
 .body {
-  background-color: #dddfd4;
+  background-color: #E3F2FD;
   padding: 0;
   margin: 0;
   min-width: 500px;
@@ -9,11 +9,20 @@
 .container {
   margin: 0 auto;
   width: 75%;
-  border: 3px solid #3fb0ac;
+
   padding: 20px;
   min-width: 500px;
+  max-width: 700px;
 
 }
+
+.container * {
+  transition-property: background-color,box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+
+}
+
 
 
 /******************************
@@ -39,10 +48,27 @@ BASIC STATE
 
 .input--text {
   outline: inherit;
+  font-size: 1.5em;
+  padding: 10px 10px;
+  height: 60px;
+}
+
+.shadow {
+  box-shadow: 0 10px 6px -6px #777;
+  cursor: pointer;
+}
+
+.shadow:active {
+  box-shadow: none;
 }
 
 .input--button {
   outline: inherit;
+  font-size: 1.5em;
+  height: 60px;
+  padding: 10px 20px;
+  margin-left: 20px;
+
 }
 
 .list {
@@ -53,6 +79,7 @@ BASIC STATE
 .task {
   display: flex;
   justify-content: space-between;
+  height: 20px;
   padding: 20px;
   box-shadow: 0 10px 6px -6px #777;
   margin: 10px 0;
@@ -63,8 +90,8 @@ BASIC STATE
   transition-timing-function: ease;
 }
 
-.task * {
-  transition-property: background-color;
+.container * {
+  transition-property: background-color,box-shadow;
   transition-duration: 0.3s;
   transition-timing-function: ease;
 
@@ -98,6 +125,19 @@ BASIC STATE
   user-select: none;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.delete:hover {
+  background-color:#d32f2f;
+  color: white;
+}
+
+.delete:active {
+  background-color:#b71c1c;
+}
+
+.edit:hover {
+  background-color:#42A5F5;
 }
 
 
@@ -135,19 +175,27 @@ COLORS
 
 }
 
+.active-green:hover {
+  background-color:#66BB6A;
+}
+
 .dark-green {
-  background-color: #004D40;
+  background-color: #0D47A1;
   color: white;
 
 }
 
-.light-green {
-  background-color: #4DB6AC;
+.dark-green:hover {
+  background-color: #1565C0;
+}
+
+.light-btn-color {
+  background-color: #64B5F6;
 }
 
 .red {
-  background-color:#e57373;
-
+  background-color:#d32f2f;
+  color: white;
 }
 
 .yellow {

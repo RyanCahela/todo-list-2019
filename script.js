@@ -77,7 +77,7 @@ const TodoList = {
 //     \__/     |__| |_______|   \__/  \__/
 //
 
-const editBtnColor = "light-green";
+const lightBtnColor = "light-btn-color";
 const redBtnColor = "red";
 const markBtnColor = "active-green";
 const btnDisableClass = "btn-disabled"
@@ -146,11 +146,11 @@ const toggleShowTextInput = function(task) {
 const toggleEditBtn = function(btn) {
   if(btn.classList.contains('js-save-state')) {
     btn.classList.remove('js-save-state', saveBtnColor);
-    btn.classList.add(editBtnColor);
+    btn.classList.add(lightBtnColor);
     btn.textContent = "Edit";
     
   } else {
-    btn.classList.remove(editBtnColor);
+    btn.classList.remove(lightBtnColor);
     btn.classList.add('js-save-state', saveBtnColor);
     btn.textContent = "Save";
     
@@ -207,7 +207,7 @@ const unmarkToggleBtn = function(el) {
 
 const disableEditBtn = function(btn) {
   //remove edit and dark-green class from edit button
-  btn.classList.remove(editBtnColor);
+  btn.classList.remove(lightBtnColor);
     //add btn-disabled class
     btn.classList.add('btn-disabled')
     //add diabled boolean to button el
@@ -218,7 +218,7 @@ const disableEditBtn = function(btn) {
 
 const enableEditBtn = function(btn) {
   //remove edit and dark-green class from edit button
-  btn.classList.add(editBtnColor);
+  btn.classList.add(lightBtnColor,'edit');
     //add btn-disabled class
     btn.classList.remove('btn-disabled')
     //add diabled boolean to button el
@@ -229,7 +229,7 @@ const enableEditBtn = function(btn) {
 
 const disableDeleteBtn = function(btn) {
   //remove delete and red class from delete button
-    btn.classList.remove(redBtnColor);
+    btn.classList.remove(lightBtnColor);
     //add btn-disabled class
     btn.classList.add('btn-disabled');
     //add diabled boolean to button el
@@ -240,7 +240,7 @@ const disableDeleteBtn = function(btn) {
 
 const enableDeleteBtn = function(btn) {
   //remove delete and red class from delete button
-    btn.classList.add(redBtnColor);
+    btn.classList.add(lightBtnColor,'delete');
     //add btn-disabled class
     btn.classList.remove('btn-disabled');
     //add diabled boolean to button el
@@ -338,6 +338,11 @@ const taskUL = document.querySelector('.list');
 const newTaskInput = document.querySelector('.js-add-input');
 
 
+newTaskInput.addEventListener('keyup',function(){
+  addBtn.classList.add('shadow');
+});
+
+
 
 const createNewTask = function(titleText){
   //create all elements in a task
@@ -356,8 +361,8 @@ const createNewTask = function(titleText){
   newTaskTitle.classList.add('js-task-title','task--title');
   newTaskEditInput.classList.add('js-task-edit-input','hidden','task-edit-input');
   newTaskEditInput.setAttribute("type","text");
-  newTaskEditBtn.classList.add('js-edit-btn','task--btn','light-green');
-  newTaskDeleteBtn.classList.add('js-delete-btn','task--btn','delete', 'red');
+  newTaskEditBtn.classList.add('js-edit-btn','task--btn','edit','light-btn-color');
+  newTaskDeleteBtn.classList.add('js-delete-btn','task--btn','delete','light-btn-color');
 
 
 
@@ -398,6 +403,8 @@ addBtn.addEventListener('click',function(e){
 
   //create new taskArray with new task included
   newTask.addEventListener('click', btnClickListener);
+
+  addBtn.classList.remove('shadow');
 
 });
 
