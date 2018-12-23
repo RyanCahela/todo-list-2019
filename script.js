@@ -1,8 +1,6 @@
 "use strict";
 (function(){
 
-  let tasksArray = null;
-
 
 //   /\/\   ___   __| | ___| |
 //  /    \ / _ \ / _` |/ _ \ |
@@ -90,6 +88,7 @@ const saveBtnColor = "dark-green";
 const getDOMTasks = function() {
   const taskNodeList = document.querySelectorAll(".task");
   let tasksArray = Array.from(taskNodeList);
+  console.log(tasksArray);
   return tasksArray;
 }
 
@@ -97,24 +96,26 @@ const getDOMTasks = function() {
 
 const assignListenersToList = function(listArray) {
   listArray.forEach(function(item){
-    item.addEventListener("click", function(e){
-      //id button
-      if(e.target.classList.contains('js-toggle-btn')) {
-        let taskBeingClicked = this;
-        toggleTaskCSS(taskBeingClicked);
-      }
-
-      if(e.target.classList.contains('js-delete-btn')) {
-        let taskBeingClicked = this;
-        taskBeingClicked.remove();
-      }
-
-      if(e.target.classList.contains('js-edit-btn')) {
-        let taskBeingClicked = this;
-        toggleEditTask(taskBeingClicked);
-      }
-    });
+    item.addEventListener("click", btnClickListener)
   });
+}
+
+const btnClickListener = function(e) {
+  if(e.target.classList.contains('js-toggle-btn')) {
+    let taskBeingClicked = this;
+    console.log(taskBeingClicked);
+    toggleTaskCSS(taskBeingClicked);
+  }
+
+  if(e.target.classList.contains('js-delete-btn')) {
+    let taskBeingClicked = this;
+    taskBeingClicked.remove();
+  }
+
+  if(e.target.classList.contains('js-edit-btn')) {
+    let taskBeingClicked = this;
+    toggleEditTask(taskBeingClicked);
+  }
 }
 
 
@@ -342,7 +343,7 @@ const createNewTask = function(titleText){
   //create all elements in a task
   let newTask = document.createElement('li');
   let newTaskToggleBtn = document.createElement('button');
-  let newTaskTitle = document.createElement('span');
+  let newTaskTitle = document.createElement('div');
   let newTaskEditInput = document.createElement('input');
   let newTaskEditBtn = document.createElement('button');
   let newTaskDeleteBtn = document.createElement('button');
@@ -354,6 +355,7 @@ const createNewTask = function(titleText){
   newTaskToggleBtn.classList.add('js-toggle-btn','task--btn','mark-toggle','active-green');
   newTaskTitle.classList.add('js-task-title','task--title');
   newTaskEditInput.classList.add('js-task-edit-input','hidden','task-edit-input');
+  newTaskEditInput.setAttribute("type","text");
   newTaskEditBtn.classList.add('js-edit-btn','task--btn','light-green');
   newTaskDeleteBtn.classList.add('js-delete-btn','task--btn','delete', 'red');
 
@@ -395,15 +397,14 @@ addBtn.addEventListener('click',function(e){
   taskUL.prepend(newTask);
 
   //create new taskArray with new task included
-  tasksArray = getDOMTasks();
-  assignListenersToList(tasksArray);
+  newTask.addEventListener('click', btnClickListener);
 
 });
 
 
 
 const init = function() {
-  tasksArray = getDOMTasks();
+  let tasksArray = getDOMTasks();
   assignListenersToList(tasksArray);
 }
 
