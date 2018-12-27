@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 (function(){
 
 
@@ -24,7 +24,7 @@ const TodoList = {
     for(let i=0; i < this.list.length; i++) {
       if(this.list[i].todoText == thingToRemove) {
         this.list.splice(i,1);
-        console.log("todo removed");
+        console.log('todo removed');
         break;
       }
     }
@@ -35,7 +35,7 @@ const TodoList = {
     for(let i=0; i < this.list.length; i++) {
       if(this.list[i].todoText == oldValue) {
         this.list[i].todoText = newValue;
-        console.log("todo changed");
+        console.log('todo changed');
         break;
       }
     }
@@ -44,14 +44,14 @@ const TodoList = {
 
   displayTodos: function() {
     if(this.list.length === 0){
-      console.log("The list is empty");
+      console.log('The list is empty');
     }
     let todos = [];
     for(let i=0; i < this.list.length; i++) {
 
       todos.push(this.list[i].todoText);
     }
-    console.log("Todos: " + todos);
+    console.log('Todos: ' + todos);
   },
 
 
@@ -64,8 +64,8 @@ const TodoList = {
         todo.taskCompleted = !todo.taskCompleted;
         break;
       }
-      }
     }
+  }
 }//END TodoList
 
 
@@ -77,16 +77,16 @@ const TodoList = {
 //     \__/     |__| |_______|   \__/  \__/
 //
 
-const lightBtnColor = "light-btn-color";
-const redBtnColor = "red";
-const markBtnColor = "active-green";
-const btnDisableClass = "btn-disabled"
-const saveBtnColor = "dark-green";
+const lightBtnColor = 'light-btn-color';
+const redBtnColor = 'red';
+const markBtnColor = 'active-green';
+const btnDisableClass = 'btn-disabled'
+const saveBtnColor = 'dark-green';
 
 
 
 const getDOMTasks = function() {
-  const taskNodeList = document.querySelectorAll(".task");
+  const taskNodeList = document.querySelectorAll('.task');
   let tasksArray = Array.from(taskNodeList);
   console.log(tasksArray);
   return tasksArray;
@@ -96,9 +96,11 @@ const getDOMTasks = function() {
 
 const assignListenersToList = function(listArray) {
   listArray.forEach(function(item){
-    item.addEventListener("click", btnClickListener)
+    item.addEventListener('click', btnClickListener)
   });
 }
+
+
 
 const btnClickListener = function(e) {
   if(e.target.classList.contains('js-toggle-btn')) {
@@ -121,7 +123,7 @@ const btnClickListener = function(e) {
 
 
 const toggleShowTaskTitle = function(task) {
-  const titleEl = task.querySelector(".js-task-title");
+  const titleEl = task.querySelector('.js-task-title');
   
   if(titleEl.classList.contains('hidden')) {
     titleEl.classList.remove('hidden');
@@ -147,12 +149,12 @@ const toggleEditBtn = function(btn) {
   if(btn.classList.contains('js-save-state')) {
     btn.classList.remove('js-save-state', saveBtnColor);
     btn.classList.add(lightBtnColor);
-    btn.textContent = "Edit";
+    btn.textContent = 'Edit';
     
   } else {
     btn.classList.remove(lightBtnColor);
     btn.classList.add('js-save-state', saveBtnColor);
-    btn.textContent = "Save";
+    btn.textContent = 'Save';
     
 }
 
@@ -172,8 +174,7 @@ const toggleTaskCSS = function(task) {
 }
 
 
-
-
+//TOGGLE BUTTON FUNCTIONS
 const enableToggleBtn = function(btn) {
   btn.classList.remove(btnDisableClass);
   btn.classList.add(markBtnColor);
@@ -203,7 +204,7 @@ const unmarkToggleBtn = function(el) {
   el.textContent = 'Mark';
 }
 
-
+//EDIT BUTTON FUNCTIONS
 
 const disableEditBtn = function(btn) {
   //remove edit and dark-green class from edit button
@@ -225,7 +226,7 @@ const enableEditBtn = function(btn) {
     btn.removeAttribute('disabled');
 }
 
-
+//DELETE BUTTON FUNCTIONS
 
 const disableDeleteBtn = function(btn) {
   //remove delete and red class from delete button
@@ -252,19 +253,21 @@ const enableDeleteBtn = function(btn) {
     btn.removeAttribute('disabled');
 }
 
+
+//Grabs Task Buttons of given element and returns a those buttons as an object
 const getTaskBtns = function(el) {
   let toggleBtn,
       editBtn,
       deleteBtn;
   //grab buttons
   for(let i=0; i < el.children.length; i++) {
-    if(el.children[i].classList.contains("js-toggle-btn")) {
+    if(el.children[i].classList.contains('js-toggle-btn')) {
       toggleBtn = el.children[i];
     }
-    if(el.children[i].classList.contains("js-edit-btn")) {
+    if(el.children[i].classList.contains('js-edit-btn')) {
       editBtn = el.children[i];
     }
-    if(el.children[i].classList.contains("js-delete-btn")) {
+    if(el.children[i].classList.contains('js-delete-btn')) {
       deleteBtn = el.children[i];
     }
   }
@@ -304,7 +307,7 @@ const markTaskDone = function(task) {
   //add js-marked-done class
   task.classList.add('js-marked-done');
   //add grey class to task el
-  task.classList.add("grey");
+  task.classList.add('grey');
 
   let taskBtns = getTaskBtns(task);
   markToggleBtn(taskBtns.toggleBtn);
@@ -320,7 +323,7 @@ const markTaskIncomplete = function(task) {
   //remove js-marked-done class
   task.classList.remove('js-marked-done');
   //add grey class to task el
-  task.classList.remove("grey");
+  task.classList.remove('grey');
 
   let taskBtns = getTaskBtns(task);
 
@@ -343,8 +346,14 @@ const taskUL = document.querySelector('.list');
 const newTaskInput = document.querySelector('.js-add-input');
 
 
-newTaskInput.addEventListener('keyup',function(){
-  addBtn.classList.add('shadow');
+newTaskInput.addEventListener('keyup',function() {
+
+  if(newTaskInput.value) {
+    addBtn.classList.add('shadow');
+  } else {
+    addBtn.classList.remove('shadow');
+  }
+
 });
 
 
@@ -365,7 +374,7 @@ const createNewTask = function(titleText){
   newTaskToggleBtn.classList.add('js-toggle-btn','task--btn','mark-toggle','active-green');
   newTaskTitle.classList.add('js-task-title','task--title');
   newTaskEditInput.classList.add('js-task-edit-input','hidden','task-edit-input');
-  newTaskEditInput.setAttribute("type","text");
+  newTaskEditInput.setAttribute('type','text');
   newTaskEditBtn.classList.add('js-edit-btn','task--btn','edit','light-btn-color');
   newTaskDeleteBtn.classList.add('js-delete-btn','task--btn','delete','light-btn-color');
 
@@ -391,7 +400,8 @@ const createNewTask = function(titleText){
 
 
 
-addBtn.addEventListener('click',function(e){
+addBtn.addEventListener('submit',function(e){
+  e.preventDefault;
   //if input empty return without doing anything
   if(!newTaskInput.value) {
     return;
@@ -399,7 +409,7 @@ addBtn.addEventListener('click',function(e){
 
   //grab value from add task input the reset field
   let titleText = newTaskInput.value;
-  newTaskInput.value = "";
+  newTaskInput.value = '';
 
   let newTask = createNewTask(titleText);
 
