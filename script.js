@@ -400,8 +400,8 @@ const createNewTask = function(titleText){
 
 
 
-addBtn.addEventListener('submit',function(e){
-  e.preventDefault;
+addBtn.addEventListener('click',function(e){
+  e.preventDefault();
   //if input empty return without doing anything
   if(!newTaskInput.value) {
     return;
