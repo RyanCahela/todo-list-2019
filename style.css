@@ -198,6 +198,10 @@ COLORS
   color: white;
 }
 
+.red:hover {
+  background-color:#b71c1c;
+}
+
 .yellow {
   background-color: #fae596;
 }

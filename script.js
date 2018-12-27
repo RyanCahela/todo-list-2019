@@ -207,7 +207,7 @@ const unmarkToggleBtn = function(el) {
 
 const disableEditBtn = function(btn) {
   //remove edit and dark-green class from edit button
-  btn.classList.remove(lightBtnColor);
+  btn.classList.remove(lightBtnColor,'edit');
     //add btn-disabled class
     btn.classList.add('btn-disabled')
     //add diabled boolean to button el
@@ -229,11 +229,16 @@ const enableEditBtn = function(btn) {
 
 const disableDeleteBtn = function(btn) {
   //remove delete and red class from delete button
-    btn.classList.remove(lightBtnColor);
+    btn.classList.remove(lightBtnColor,'delete');
     //add btn-disabled class
     btn.classList.add('btn-disabled');
     //add diabled boolean to button el
     btn.setAttribute('disabled','disabled');
+}
+
+const changeDeleteBtnColor = function(btn) {
+  btn.classList.toggle(lightBtnColor);
+  btn.classList.toggle(redBtnColor);
 }
 
 
@@ -242,7 +247,7 @@ const enableDeleteBtn = function(btn) {
   //remove delete and red class from delete button
     btn.classList.add(lightBtnColor,'delete');
     //add btn-disabled class
-    btn.classList.remove('btn-disabled');
+    btn.classList.remove('btn-disabled','red');
     //add diabled boolean to button el
     btn.removeAttribute('disabled');
 }
@@ -304,7 +309,7 @@ const markTaskDone = function(task) {
   let taskBtns = getTaskBtns(task);
   markToggleBtn(taskBtns.toggleBtn);
   disableEditBtn(taskBtns.editBtn);
-  disableDeleteBtn(taskBtns.deleteBtn);
+  changeDeleteBtnColor(taskBtns.deleteBtn);
 }
 
 
