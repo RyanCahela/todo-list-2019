@@ -4,6 +4,7 @@
   padding: 0;
   margin: 0;
   min-width: 500px;
+  display: border-box;
 }
 
 .container {
@@ -51,11 +52,16 @@ BASIC STATE
   font-size: 1.5em;
   padding: 10px 10px;
   height: 60px;
+  width: 75%;
 }
 
 .shadow {
   box-shadow: 0 10px 6px -6px #777;
   cursor: pointer;
+}
+
+.shadow:hover {
+  background-color: #E0E0E0;
 }
 
 .shadow:active {
@@ -67,9 +73,11 @@ BASIC STATE
   font-size: 1.5em;
   height: 60px;
   padding: 10px 20px;
-  margin-left: 20px;
+  width: 25%;
+  display: inline-block;
 
 }
+
 
 .list {
   list-style: none;
@@ -156,7 +164,7 @@ UNACTIVE STATE
 }
 
 .grey {
-  background-color: grey;
+  background-color: #757575;
   box-shadow:0 6px 6px -6px #777;
 }
 
