@@ -85,7 +85,7 @@ const saveBtnColor = 'dark-green';
 
 function toggleTaskCSS(task) {
   if (task.classList.contains('js-marked-done')) {
-   markTaskIncomplete(task);
+    markTaskIncomplete(task);
   
   } else {
     markTaskDone(task);
