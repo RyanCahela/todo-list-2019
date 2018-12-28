@@ -1,4 +1,18 @@
-/* Styles go here */
+:root {
+
+  --active-btn-color: #64B5F6;
+  --active-btn-hover-color: #42A5F5;
+  --active-task-bg-color: #0288D1;
+  --active-mark-btn-color: #81C784;
+  --active-mark-btn-hover-color: #66BB6A;
+  --active-edit-btn-hover-color: #42A5F5;
+  --delete-btn-color: #d32f2f;
+  --delete-btn-hover-color: #b71c1c;
+  --inactive-task-bg-color: #757575;
+  --edit-state-edit-btn-color: #0D47A1;
+  --edit-state-edit-btn-hover-color: #1565C0;
+
+}
 .body {
   background-color: #E3F2FD;
   padding: 0;
@@ -10,7 +24,6 @@
 .container {
   margin: 0 auto;
   width: 75%;
-
   padding: 20px;
   min-width: 500px;
   max-width: 700px;
@@ -27,7 +40,7 @@
 
 
 /******************************
-BASIC STATE
+GENERAL RULES
 *******************************/
 
 
@@ -91,40 +104,13 @@ BASIC STATE
   padding: 20px;
   box-shadow: 0 10px 6px -6px #777;
   margin: 10px 0;
-  background-color: #0288D1;
   cursor: default;
   transition-property: background-color,box-shadow;
   transition-duration: 0.3s;
   transition-timing-function: ease;
 }
 
-.container * {
-  transition-property: background-color,box-shadow;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
-
-}
-
-
-.task--btn {
-  outline: none;
-  cursor: pointer;
-  width: 70px;
-  border: none;
-}
-
-.task--btn:active {
-  transform:scale(0.99);
-}
-
-.task-edit-input {
-  flex-basis: 50%;
-  text-align: center;
-  font-weight: bold;
-  outline: none;
-}
-
-.task--title {
+.task-title {
   flex-basis: 50%;
   text-align: center;
   -webkit-touch-callout: none;
@@ -137,81 +123,131 @@ BASIC STATE
   white-space: nowrap;
 }
 
-.delete:hover {
-  background-color:#d32f2f;
+.task-btn {
+  outline: none;
+  cursor: pointer;
+  width: 70px;
+  border: none;
+}
+
+.task-btn:active {
+  transform: scale(0.98);
+}
+
+.task-edit-input {
+  flex-basis: 50%;
+  text-align: center;
+  font-weight: bold;
+  outline: none;
+}
+
+
+/******************************
+ACTIVE STATE
+*******************************/
+.active-state {
+  background-color: var(--active-task-bg-color);
+}
+
+.active-state .mark-btn {
+  background-color: #81C784;
+}
+
+.active-state .mark-btn:hover {
+  background-color: #66BB6A;
+}
+
+.active-state .edit-btn {
+  background-color: var(--active-btn-color);
+}
+
+.active-state .edit-btn:hover {
+  background-color: var(--active-btn-hover-color);
+}
+
+.active-state .delete-btn {
+  background-color: var(--active-btn-color);
+}
+ 
+.active-state .delete-btn:hover {
+  background-color: var(--delete-btn-color);
   color: white;
 }
 
-.delete:active {
-  background-color:#b71c1c;
+.active-state .delete-btn:active {
+  background-color: var(--delete-btn-hover-color);
 }
 
-.edit:hover {
-  background-color:#42A5F5;
-}
-
-
-/*************************
-UNACTIVE STATE
-***************************/
-.btn-disabled {
-  cursor: not-allowed;
-}
-
-.flatten {
-  box-shadow: 0 5px 3px -3px #777;
-
-}
-
-.grey {
-  background-color: #757575;
-  box-shadow:0 6px 6px -6px #777;
-}
-
-.hidden {
+.active-state .task-edit-input,
+.inactive-state .task-edit-input {
   display: none;
 }
 
 
-
-
-
-/**************************
-COLORS
+/*************************
+INACTIVE STATE
 ***************************/
-
-.active-green {
-  background-color: #81C784;
-
+.inactive-state {
+  background-color: var(--inactive-task-bg-color);
 }
 
-.active-green:hover {
-  background-color:#66BB6A;
+.inactive-state .mark-btn {
+  background-color: var(--delete-btn-color);
 }
 
-.dark-green {
-  background-color: #0D47A1;
+.inactive-state .mark-btn:hover {
+  background-color: var(--delete-btn-hover-color);
+}
+
+.inactive-state .edit-btn {
+  cursor: not-allowed;
+  transform: none;
+}
+
+.inactive-state .delete-btn {
+  background-color: var(--delete-btn-color);
+}
+
+.inactive-state .delete-btn:hover {
+  background-color: var(--delete-btn-hover-color);
+}
+
+/*******************************
+EDIT STATE
+********************************/
+
+
+.edit-state {
+  background-color: var(--active-task-bg-color);
+}
+
+.edit-state .task-title {
+  display: none;
+}
+
+.edit-state .edit-btn {
+  background-color: var(--edit-state-edit-btn-color);
   color: white;
-
 }
 
-.dark-green:hover {
-  background-color: #1565C0;
+.edit-state .edit-btn:hover {
+  background-color: var(--edit-state-edit-btn-hover-color);
 }
 
-.light-btn-color {
-  background-color: #64B5F6;
+.edit-state .delete-btn {
+  cursor: not-allowed;
 }
 
-.red {
-  background-color:#d32f2f;
-  color: white;
+.edit-state .mark-btn {
+  cursor: not-allowed;
 }
 
-.red:hover {
-  background-color:#b71c1c;
+.edit-state .mark-btn,
+.edit-state .delete-btn {
+  transform: none;
 }
 
-.yellow {
-  background-color: #fae596;
-}
+
+
+
+
