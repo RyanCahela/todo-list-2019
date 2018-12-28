@@ -21,8 +21,8 @@ const TodoList = {
 
 
   removeTodo: function(thingToRemove) {
-    for(let i=0; i < this.list.length; i++) {
-      if(this.list[i].todoText == thingToRemove) {
+    for (let i=0; i < this.list.length; i++) {
+      if (this.list[i].todoText == thingToRemove) {
         this.list.splice(i,1);
         console.log('todo removed');
         break;
@@ -32,8 +32,8 @@ const TodoList = {
 
 
   changeTodo: function(oldValue, newValue) {
-    for(let i=0; i < this.list.length; i++) {
-      if(this.list[i].todoText == oldValue) {
+    for (let i=0; i < this.list.length; i++) {
+      if (this.list[i].todoText == oldValue) {
         this.list[i].todoText = newValue;
         console.log('todo changed');
         break;
@@ -43,11 +43,11 @@ const TodoList = {
 
 
   displayTodos: function() {
-    if(this.list.length === 0){
+    if (this.list.length === 0){
       console.log('The list is empty');
     }
     let todos = [];
-    for(let i=0; i < this.list.length; i++) {
+    for (let i=0; i < this.list.length; i++) {
 
       todos.push(this.list[i].todoText);
     }
@@ -56,9 +56,9 @@ const TodoList = {
 
 
   toggleCompleted: function(todoText) {
-    for(let i=0; i < this.list.length; i++) {
+    for (let i=0; i < this.list.length; i++) {
       console.log(i);
-      if(this.list[i].todoText == todoText) {
+      if (this.list[i].todoText == todoText) {
       //toggles boolean value
         let todo = this.list[i];
         todo.taskCompleted = !todo.taskCompleted;
@@ -83,42 +83,47 @@ const markBtnColor = 'active-green';
 const btnDisableClass = 'btn-disabled'
 const saveBtnColor = 'dark-green';
 
+function toggleTaskCSS(task) {
+  if (task.classList.contains('js-marked-done')) {
+   markTaskIncomplete(task);
+  
+  } else {
+    markTaskDone(task);
+  }
+}
 
-
-const toggleShowTaskTitle = function(task) {
+//EDIT STATE
+function toggleShowTaskTitle(task) {
   const titleEl = task.querySelector('.js-task-title');
   const textInput = task.querySelector('input[type="text"]');
 
   //if new value enterd update title text
-  if(textInput.value) {
+  if (textInput.value) {
     titleEl.textContent = String(textInput.value);
   }
   
-  if(titleEl.classList.contains('hidden')) {
+  if (titleEl.classList.contains('hidden')) {
     titleEl.classList.remove('hidden');
   } else {
     titleEl.classList.add('hidden');
   }
 }
 
-
-const toggleShowTextInput = function(task) {
+function toggleShowTextInput(task) {
   const textInput = task.querySelector('input[type="text"]');
 
-  if(textInput.classList.contains('hidden')) {
+  if (textInput.classList.contains('hidden')) {
     textInput.classList.remove('hidden');
   } else {
     textInput.classList.add('hidden');
   }
 }
 
-
-
-const toggleEditBtn = function(btn) {
-  if(btn.classList.contains('js-save-state')) {
-    btn.classList.remove('js-save-state', saveBtnColor);
-    btn.classList.add(lightBtnColor);
-    btn.textContent = 'Edit';
+function toggleEditBtn(btn) {
+  if (btn.classList.contains('js-save-state')) {
+     btn.classList.remove('js-save-state', saveBtnColor);
+     btn.classList.add(lightBtnColor);
+     btn.textContent = 'Edit';
     
   } else {
     btn.classList.remove(lightBtnColor);
@@ -129,19 +134,23 @@ const toggleEditBtn = function(btn) {
 
 }
 
-
-
-
-
-function toggleTaskCSS(task) {
-  if(task.classList.contains('js-marked-done')) {
-   markTaskIncomplete(task);
-  
-  } else {
-    markTaskDone(task);
-  }
+function disableEditBtn(btn) {
+  //remove edit and dark-green class from edit button
+  btn.classList.remove(lightBtnColor,'edit');
+  //add btn-disabled class
+  btn.classList.add('btn-disabled')
+  //add diabled boolean to button el
+  btn.setAttribute('disabled','disabled');
 }
 
+function enableEditBtn(btn) {
+  //remove edit and dark-green class from edit button
+  btn.classList.add(lightBtnColor,'edit');
+  //add btn-disabled class
+  btn.classList.remove('btn-disabled')
+  //add diabled boolean to button el
+  btn.removeAttribute('disabled');
+}
 
 //TOGGLE BUTTON FUNCTIONS
 function enableToggleBtn(btn) {
@@ -168,25 +177,6 @@ function unmarkToggleBtn(el) {
   el.textContent = 'Mark';
 }
 
-//EDIT BUTTON FUNCTIONS
-function disableEditBtn(btn) {
-  //remove edit and dark-green class from edit button
-  btn.classList.remove(lightBtnColor,'edit');
-    //add btn-disabled class
-    btn.classList.add('btn-disabled')
-    //add diabled boolean to button el
-    btn.setAttribute('disabled','disabled');
-}
-
-function enableEditBtn(btn) {
-  //remove edit and dark-green class from edit button
-  btn.classList.add(lightBtnColor,'edit');
-    //add btn-disabled class
-    btn.classList.remove('btn-disabled')
-    //add diabled boolean to button el
-    btn.removeAttribute('disabled');
-}
-
 //DELETE BUTTON FUNCTIONS
 function disableDeleteBtn(btn) {
   //remove delete and red class from delete button
@@ -211,21 +201,20 @@ function enableDeleteBtn(btn) {
     btn.removeAttribute('disabled');
 }
 
-
 //Grabs Task Buttons of given element and returns a those buttons as an object
 function getTaskBtns(el) {
   let toggleBtn,
       editBtn,
       deleteBtn;
   //grab buttons
-  for(let i=0; i < el.children.length; i++) {
-    if(el.children[i].classList.contains('js-toggle-btn')) {
+  for (let i=0; i < el.children.length; i++) {
+    if (el.children[i].classList.contains('js-toggle-btn')) {
       toggleBtn = el.children[i];
     }
-    if(el.children[i].classList.contains('js-edit-btn')) {
+    if (el.children[i].classList.contains('js-edit-btn')) {
       editBtn = el.children[i];
     }
-    if(el.children[i].classList.contains('js-delete-btn')) {
+    if (el.children[i].classList.contains('js-delete-btn')) {
       deleteBtn = el.children[i];
     }
   }
@@ -236,8 +225,6 @@ function getTaskBtns(el) {
     deleteBtn: deleteBtn
   }
 }
-
-
 
 //MARK TASK DONE
 function markTaskDone(task) {
@@ -251,8 +238,6 @@ function markTaskDone(task) {
   disableEditBtn(taskBtns.editBtn);
   changeDeleteBtnColor(taskBtns.deleteBtn);
 }
-
-
 
 //MARK TASK INCOMPLETE
 function markTaskIncomplete(task) {
@@ -268,88 +253,6 @@ function markTaskIncomplete(task) {
   enableEditBtn(taskBtns.editBtn);
   enableDeleteBtn(taskBtns.deleteBtn);
 }
-
-
-// ______   ______   .__   __. .___________..______        ______    __       __       _______ .______
-//  /      | /  __  \  |  \ |  | |           ||   _  \      /  __  \  |  |     |  |     |   ____||   _  \
-// |  ,----'|  |  |  | |   \|  | `---|  |----`|  |_)  |    |  |  |  | |  |     |  |     |  |__   |  |_)  |
-// |  |     |  |  |  | |  . `  |     |  |     |      /     |  |  |  | |  |     |  |     |   __|  |      /
-// |  `----.|  `--'  | |  |\   |     |  |     |  |\  \----.|  `--'  | |  `----.|  `----.|  |____ |  |\  \----.
-//  \______| \______/  |__| \__|     |__|     | _| `._____| \______/  |_______||_______||_______|| _| `._____|
-//
-//DOM cache
-const addBtn = document.querySelector('.js-add-btn');
-const taskUL = document.querySelector('.list');
-const newTaskInput = document.querySelector('.js-add-input');
-
-function getDOMTasks() {
-  const taskNodeList = document.querySelectorAll('.task');
-  let tasksArray = Array.from(taskNodeList);
-  console.log(tasksArray);
-  return tasksArray;
-}
-
-
-function assignListenersToList(listArray) {
-  listArray.forEach(function(item){
-    item.addEventListener('click', btnClickListener)
-  });
-}
-
-
-function btnClickListener(e) {
-  if(e.target.classList.contains('js-toggle-btn')) {
-    let taskBeingClicked = this;
-    console.log(taskBeingClicked);
-    toggleTaskCSS(taskBeingClicked);
-  }
-
-  if(e.target.classList.contains('js-delete-btn')) {
-    let taskBeingClicked = this;
-    taskBeingClicked.remove();
-  }
-
-  if(e.target.classList.contains('js-edit-btn')) {
-    let taskBeingClicked = this;
-    toggleEditTask(taskBeingClicked);
-  }
-}
-
-
-
-//EDIT TASK
-function toggleEditTask(task) {
-  let taskBtns = getTaskBtns(task);
-  if(taskBtns.editBtn.classList.contains('js-save-state')) {
-    enableDeleteBtn(taskBtns.deleteBtn);
-    toggleEditBtn(taskBtns.editBtn);
-    enableToggleBtn(taskBtns.toggleBtn);
-    toggleShowTextInput(task);
-    toggleShowTaskTitle(task);
-    
-  } else {
-    
-    disableToggleBtn(taskBtns.toggleBtn);
-    disableDeleteBtn(taskBtns.deleteBtn);
-    toggleShowTaskTitle(task);
-    toggleShowTextInput(task);
-    toggleEditBtn(taskBtns.editBtn);
-  }
-}
-
-
-newTaskInput.addEventListener('keyup',function() {
-
-  if(newTaskInput.value) {
-    addBtn.classList.add('shadow');
-  } else {
-    addBtn.classList.remove('shadow');
-  }
-
-});
-
-
-
 
 function createNewTask(titleText){
   //create all elements in a task
@@ -386,11 +289,82 @@ function createNewTask(titleText){
 }
 
 
+// ______   ______   .__   __. .___________..______        ______    __       __       _______ .______
+//  /      | /  __  \  |  \ |  | |           ||   _  \      /  __  \  |  |     |  |     |   ____||   _  \
+// |  ,----'|  |  |  | |   \|  | `---|  |----`|  |_)  |    |  |  |  | |  |     |  |     |  |__   |  |_)  |
+// |  |     |  |  |  | |  . `  |     |  |     |      /     |  |  |  | |  |     |  |     |   __|  |      /
+// |  `----.|  `--'  | |  |\   |     |  |     |  |\  \----.|  `--'  | |  `----.|  `----.|  |____ |  |\  \----.
+//  \______| \______/  |__| \__|     |__|     | _| `._____| \______/  |_______||_______||_______|| _| `._____|
+//
+//DOM cache
+const addBtn = document.querySelector('.js-add-btn');
+const taskUL = document.querySelector('.list');
+const newTaskInput = document.querySelector('.js-add-input');
 
-addBtn.addEventListener('click',function(e){
+function getDOMTasks() {
+  const taskNodeList = document.querySelectorAll('.task');
+  let tasksArray = Array.from(taskNodeList);
+  console.log(tasksArray);
+  return tasksArray;
+}
+
+function assignListenersToList(listArray) {
+  listArray.forEach(function(item){
+    item.addEventListener('click', btnClickListener)
+  });
+}
+
+function btnClickListener(e) {
+  if (e.target.classList.contains('js-toggle-btn')) {
+    let taskBeingClicked = this;
+    console.log(taskBeingClicked);
+    toggleTaskCSS(taskBeingClicked);
+  }
+
+  if (e.target.classList.contains('js-delete-btn')) {
+    let taskBeingClicked = this;
+    taskBeingClicked.remove();
+  }
+
+  if (e.target.classList.contains('js-edit-btn')) {
+    let taskBeingClicked = this;
+    toggleEditTask(taskBeingClicked);
+  }
+}
+
+function toggleEditTask(task) {
+  let taskBtns = getTaskBtns(task);
+  if (taskBtns.editBtn.classList.contains('js-save-state')) {
+    enableDeleteBtn(taskBtns.deleteBtn);
+    toggleEditBtn(taskBtns.editBtn);
+    enableToggleBtn(taskBtns.toggleBtn);
+    toggleShowTextInput(task);
+    toggleShowTaskTitle(task);
+    
+  } else {
+    
+    disableToggleBtn(taskBtns.toggleBtn);
+    disableDeleteBtn(taskBtns.deleteBtn);
+    toggleShowTaskTitle(task);
+    toggleShowTextInput(task);
+    toggleEditBtn(taskBtns.editBtn);
+  }
+}
+
+newTaskInput.addEventListener('keyup',function() {
+
+  if (newTaskInput.value) {
+    addBtn.classList.add('shadow');
+  } else {
+    addBtn.classList.remove('shadow');
+  }
+
+});
+
+addBtn.addEventListener('click',function(e) {
   e.preventDefault();
   //if input empty return without doing anything
-  if(!newTaskInput.value) {
+  if (!newTaskInput.value) {
     return;
   }
 
@@ -410,16 +384,11 @@ addBtn.addEventListener('click',function(e){
 
 });
 
-
-
 function init() {
   let tasksArray = getDOMTasks();
   assignListenersToList(tasksArray);
 }
 
-
 init();
-
-
 
 })();
