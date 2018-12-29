@@ -92,17 +92,31 @@ function toggleEditState(task) {
   let deleteBtn = task.querySelector('.delete-btn');
   let editInput = task.querySelector('.task-edit-input');
   let taskTitle = task.querySelector('.task-title');
+  
 
 
   if (task.classList.contains('edit-state')) {
-     task.classList.remove('edit-state');
-     task.classList.add('active-state');
-     editBtn.textContent = 'Edit';
-     markBtn.removeAttribute('disabled');
-     deleteBtn.removeAttribute('disabled');
-     taskTitle.textContent = editInput.value;
-    
-  } else {
+    //check if input is empty
+    if(!editInput.value) {
+      editInput.classList.add('warning');
+      let removeWarning = setTimeout(function() {
+      editInput.classList.remove('warning');
+      }, 500);
+      return;
+    }
+    //exit edit state
+    task.classList.remove('edit-state');
+    task.classList.add('active-state');
+    editBtn.textContent = 'Edit';
+    markBtn.removeAttribute('disabled');
+    deleteBtn.removeAttribute('disabled');
+    taskTitle.textContent = editInput.value;
+    editInput.classList.remove('warning');
+    return;
+  } 
+  
+  if (task.classList.contains('active-state')) {
+    //enter edit state
     task.classList.remove('active-state');
     task.classList.add('edit-state');
     editBtn.textContent = 'Save';

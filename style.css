@@ -11,6 +11,7 @@
   --inactive-task-bg-color: #757575;
   --edit-state-edit-btn-color: #0D47A1;
   --edit-state-edit-btn-hover-color: #1565C0;
+  --task-font-size: 2em;
 
 }
 .body {
@@ -27,6 +28,8 @@
   padding: 20px;
   min-width: 500px;
   max-width: 700px;
+  font-family: 'Merriweather', serif;
+
 
 }
 
@@ -48,6 +51,7 @@ GENERAL RULES
   background-color: #212121;
   padding: 20px;
   margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .header--heading {
@@ -88,9 +92,7 @@ GENERAL RULES
   padding: 10px 20px;
   width: 25%;
   display: inline-block;
-
 }
-
 
 .list {
   list-style: none;
@@ -100,7 +102,6 @@ GENERAL RULES
 .task {
   display: flex;
   justify-content: space-between;
-  height: 20px;
   padding: 20px;
   box-shadow: 0 10px 6px -6px #777;
   margin: 10px 0;
@@ -111,6 +112,8 @@ GENERAL RULES
 }
 
 .task-title {
+  letter-spacing: 1px;
+  font-size: var(--task-font-size);
   flex-basis: 50%;
   text-align: center;
   -webkit-touch-callout: none;
@@ -135,10 +138,29 @@ GENERAL RULES
 }
 
 .task-edit-input {
-  flex-basis: 50%;
+  font-size: var(--task-font-size);
   text-align: center;
-  font-weight: bold;
   outline: none;
+}
+
+.warning {
+  border: 3px solid var(--delete-btn-color);
+  animation: shake 0.5s;
+  box-sizing: content-box;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px)}
+  10% { transform: translate(-1px)}
+  20% { transform: translate(-3px)}
+  30% { transform: translate(3px)}
+  40% { transform: translate(1px)}
+  50% { transform: translate(-1px)}
+  60% { transform: translate(-3px)}
+  70% { transform: translate(3px)}
+  80% { transform: translate(-1px)}
+  90% { transform: translate(1px)}
+  100% { transform: translate(1px)}
 }
 
 
