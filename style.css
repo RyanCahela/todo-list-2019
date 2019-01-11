@@ -15,7 +15,7 @@
 
 }
 .body {
-  background-color: #E3F2FD;
+  background: linear-gradient(#2E7D32,#81C784);
   padding: 0;
   margin: 0;
   min-width: 500px;
