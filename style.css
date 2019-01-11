@@ -12,10 +12,11 @@
   --edit-state-edit-btn-color: #0D47A1;
   --edit-state-edit-btn-hover-color: #1565C0;
   --task-font-size: 2em;
+  --sans-serif-font: 'Roboto', sans-serif;
 
 }
 .body {
-  background-color: #E3F2FD;
+  background: linear-gradient(#7E57C2,#651FFF);
   padding: 0;
   margin: 0;
   min-width: 500px;
@@ -51,7 +52,7 @@ GENERAL RULES
   background-color: #212121;
   padding: 20px;
   margin-bottom: 20px;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--sans-serif-font);
 }
 
 .header--heading {
@@ -103,7 +104,6 @@ GENERAL RULES
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  box-shadow: 0 10px 6px -6px #777;
   margin: 10px 0;
   cursor: default;
   transition-property: background-color,box-shadow;
@@ -113,7 +113,8 @@ GENERAL RULES
 
 .task-title {
   letter-spacing: 1px;
-  font-size: var(--task-font-size);
+  font-family: var(--task-font-size);
+  font-size: 2em;
   flex-basis: 50%;
   text-align: center;
   -webkit-touch-callout: none;
@@ -123,14 +124,19 @@ GENERAL RULES
   -ms-user-select: none;
   user-select: none;
   overflow: hidden;
-  white-space: nowrap;
+  line-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .task-btn {
   outline: none;
   cursor: pointer;
-  width: 70px;
+  padding: 20px;
   border: none;
+  font-size: 1em;
+  font-weight: bold;
 }
 
 .task-btn:active {
@@ -205,6 +211,10 @@ ACTIVE STATE
   display: none;
 }
 
+.active-state {
+  box-shadow: 0 10px 6px -6px #777;
+}
+
 
 /*************************
 INACTIVE STATE
@@ -262,6 +272,10 @@ EDIT STATE
 
 .edit-state .mark-btn {
   cursor: not-allowed;
+}
+
+.edit-state .task-edit-input {
+  
 }
 
 .edit-state .mark-btn,
