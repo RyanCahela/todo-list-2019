@@ -1,5 +1,5 @@
 'use strict';
-(function(){
+(function IFFE(){
 
 
 //   /\/\   ___   __| | ___| |
@@ -92,7 +92,14 @@ function toggleEditState(task) {
   let deleteBtn = task.querySelector('.delete-btn');
   let editInput = task.querySelector('.task-edit-input');
   let taskTitle = task.querySelector('.task-title');
+
+
+  function preventDefault(e) {
+    e.preventDefault();
+  }
   
+  //prevents page reload if user presses enter
+  editInput.addEventListener('submit', preventDefault);
 
 
   if (task.classList.contains('edit-state')) {
@@ -104,6 +111,7 @@ function toggleEditState(task) {
       }, 500);
       return;
     }
+
     //exit edit state
     task.classList.remove('edit-state');
     task.classList.add('active-state');
@@ -112,6 +120,7 @@ function toggleEditState(task) {
     deleteBtn.removeAttribute('disabled');
     taskTitle.textContent = editInput.value;
     editInput.classList.remove('warning');
+    editInput.removeEventListener('submit', preventDefault);
     return;
   } 
   
@@ -123,6 +132,9 @@ function toggleEditState(task) {
     markBtn.setAttribute('disabled','disabled');
     deleteBtn.setAttribute('disabled','disabled');
     editInput.focus();
+    editInput.addEventListener('submit', function(e){
+      e.preventDefault();
+    });
 }
 
 }

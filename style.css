@@ -15,8 +15,15 @@
   --sans-serif-font: 'Roboto', sans-serif;
 
 }
+
+
+html,
+body {
+  height: 100%;
+}
+
 .body {
-  background: linear-gradient(#2E7D32,#81C784);
+  background: repeating-linear-gradient(#BBDEFB,#90CAF9,#BBDEFB);
   padding: 0;
   margin: 0;
   min-width: 500px;
@@ -115,8 +122,6 @@ GENERAL RULES
   letter-spacing: 1px;
   font-family: var(--task-font-size);
   font-size: 2em;
-  flex-basis: 50%;
-  text-align: center;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -124,10 +129,9 @@ GENERAL RULES
   -ms-user-select: none;
   user-select: none;
   overflow: hidden;
-  line-height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  margin: 0 auto;
 }
 
 .task-btn {
@@ -139,20 +143,36 @@ GENERAL RULES
   font-weight: bold;
 }
 
+.mark-btn {
+  margin-right: 10px;
+}
+
+.delete-btn {
+  margin-left: 10px;
+}
+
 .task-btn:active {
   transform: scale(0.98);
+}
+
+.task-edit-form {
+  margin-bottom: 0;
+  height: 100%;
+  align-self: center;
 }
 
 .task-edit-input {
   font-size: var(--task-font-size);
   text-align: center;
   outline: none;
+  margin-bottom: 0;
+  height: 60px;
 }
 
 .warning {
   border: 3px solid var(--delete-btn-color);
   animation: shake 0.5s;
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 @keyframes shake {
@@ -206,13 +226,19 @@ ACTIVE STATE
   background-color: var(--delete-btn-hover-color);
 }
 
-.active-state .task-edit-input,
-.inactive-state .task-edit-input {
+.active-state .task-edit-form,
+.inactive-state .task-edit-form {
   display: none;
 }
 
+.active-state .task-display {
+  display: flex;
+  flex-grow: 2;
+  justify-content: space-between;
+}
+
 .active-state {
-  box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 5px -6px rgba(119,119,119,0.6);
 }
 
 
@@ -244,6 +270,12 @@ INACTIVE STATE
   background-color: var(--delete-btn-hover-color);
 }
 
+.inactive-state .task-display {
+  display: flex;
+  flex-grow: 2;
+  justify-content: space-between;
+}
+
 /*******************************
 EDIT STATE
 ********************************/
@@ -253,16 +285,17 @@ EDIT STATE
   background-color: var(--active-task-bg-color);
 }
 
-.edit-state .task-title {
+.edit-state .task-display {
   display: none;
 }
 
-.edit-state .edit-btn {
+.edit-state .save-btn {
   background-color: var(--edit-state-edit-btn-color);
   color: white;
+  flex-shrink: 0;
 }
 
-.edit-state .edit-btn:hover {
+.edit-state .save-btn:hover {
   background-color: var(--edit-state-edit-btn-hover-color);
 }
 
@@ -270,12 +303,20 @@ EDIT STATE
   cursor: not-allowed;
 }
 
-.edit-state .mark-btn {
-  cursor: not-allowed;
+.edit-state .task-edit-form {
+  display: flex;
+  flex-grow: 2;
+  justify-content: space-between;
 }
 
 .edit-state .task-edit-input {
-  
+  border: none;
+  width: 100%;
+}
+
+
+.edit-state .mark-btn {
+  cursor: not-allowed;
 }
 
 .edit-state .mark-btn,
