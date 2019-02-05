@@ -11,8 +11,10 @@
   --inactive-task-bg-color: #757575;
   --edit-state-edit-btn-color: #0D47A1;
   --edit-state-edit-btn-hover-color: #1565C0;
+  --warning-color: #ef9a9a;
   --task-font-size: 2em;
   --sans-serif-font: 'Roboto', sans-serif;
+
 
 }
 
@@ -157,7 +159,6 @@ GENERAL RULES
 
 .task-edit-form {
   margin-bottom: 0;
-  height: 100%;
   align-self: center;
 }
 
@@ -170,7 +171,7 @@ GENERAL RULES
 }
 
 .warning {
-  border: 3px solid var(--delete-btn-color);
+  background-color: var(--warning-color);
   animation: shake 0.5s;
   box-sizing: border-box;
 }
@@ -237,7 +238,7 @@ ACTIVE STATE
   justify-content: space-between;
 }
 
-.active-state {
+.active-state,.edit-state {
   box-shadow: 0 10px 5px -6px rgba(119,119,119,0.6);
 }
 
@@ -292,7 +293,7 @@ EDIT STATE
 .edit-state .save-btn {
   background-color: var(--edit-state-edit-btn-color);
   color: white;
-  flex-shrink: 0;
+
 }
 
 .edit-state .save-btn:hover {
@@ -310,7 +311,6 @@ EDIT STATE
 }
 
 .edit-state .task-edit-input {
-  border: none;
   width: 100%;
 }
 

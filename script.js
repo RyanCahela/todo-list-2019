@@ -92,17 +92,23 @@ function toggleEditState(task) {
   let deleteBtn = task.querySelector('.delete-btn');
   let editInput = task.querySelector('.task-edit-input');
   let taskTitle = task.querySelector('.task-title');
-
-
-  function preventDefault(e) {
-    e.preventDefault();
-  }
-  
-  //prevents page reload if user presses enter
-  editInput.addEventListener('submit', preventDefault);
-
+  let editForm = task.querySelector('.task-edit-form');
 
   if (task.classList.contains('edit-state')) {
+    exitEditState();
+  } 
+    
+  if (task.classList.contains('active-state')) {
+    enterEditState();
+  }
+    
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    exitEditState();
+  }
+
+  function exitEditState() {
+
     //check if input is empty
     if(!editInput.value) {
       editInput.classList.add('warning');
@@ -112,7 +118,8 @@ function toggleEditState(task) {
       return;
     }
 
-    //exit edit state
+
+
     task.classList.remove('edit-state');
     task.classList.add('active-state');
     editBtn.textContent = 'Edit';
@@ -120,23 +127,20 @@ function toggleEditState(task) {
     deleteBtn.removeAttribute('disabled');
     taskTitle.textContent = editInput.value;
     editInput.classList.remove('warning');
-    editInput.removeEventListener('submit', preventDefault);
+    editForm.removeEventListener('submit', hadleFormSubmit);
     return;
-  } 
-  
-  if (task.classList.contains('active-state')) {
-    //enter edit state
+    }
+
+  function enterEditState() {
     task.classList.remove('active-state');
     task.classList.add('edit-state');
     editBtn.textContent = 'Save';
     markBtn.setAttribute('disabled','disabled');
     deleteBtn.setAttribute('disabled','disabled');
     editInput.focus();
-    editInput.addEventListener('submit', function(e){
-      e.preventDefault();
-    });
-}
+    editForm.addEventListener('submit', handleFormSubmit);
 
+  }
 }
 
 //MARK TASK DONE
@@ -168,14 +172,19 @@ function createNewTask(titleText){
   let newTask = document.createElement('li');
   let newTaskToggleBtn = document.createElement('button');
   let newTaskTitle = document.createElement('div');
-  let newTaskEditInput = document.createElement('input');
   let newTaskEditBtn = document.createElement('button');
+  let newTaskDisplay = document.createElement('div');
+  let newTaskEditForm = document.createElement('form');
+  let newTaskEditInput = document.createElement('input');
+  let newTaskSaveBtn = document.createElement('button');
   let newTaskDeleteBtn = document.createElement('button');
 
   //add classes to each element
   newTask.classList.add('task','active-state');
   newTaskToggleBtn.classList.add('js-mark-btn','task-btn','mark-btn');
   newTaskTitle.classList.add('js-task-title','task-title');
+  newTaskDisplay.classList.add('js-task-display','task-dispaly');
+  newTaskEditForm.classList.add('task-edit-form');
   newTaskEditInput.classList.add('task-edit-input');
   newTaskEditInput.setAttribute('type','text');
   newTaskEditBtn.classList.add('js-edit-btn','task-btn','edit-btn');
@@ -186,6 +195,13 @@ function createNewTask(titleText){
   newTaskTitle.textContent = titleText;
   newTaskEditBtn.textContent = 'Edit';
   newTaskDeleteBtn.textContent = 'Delete';
+
+  //build sub-components
+  newTaskEditForm.appendChild(newTaskEditInput);
+  newTaskEditForm.appendChild(newTaskSaveBtn)
+
+  newTaskDisplay.appendChild(newTaskTitle);
+  newTaskDisplay.appendChild(newTaskEditBtn);
 
   //build entire element
   newTask.appendChild(newTaskToggleBtn);
@@ -237,6 +253,10 @@ function btnClickListener(e) {
   if (e.target.classList.contains('js-edit-btn')) {
     let taskBeingClicked = this;
     console.log(this);
+    toggleEditState(taskBeingClicked);
+  }
+  if (e.target.classList.contains('js-save-btn')) {
+    let taskBeingClicked = this;
     toggleEditState(taskBeingClicked);
   }
 }
