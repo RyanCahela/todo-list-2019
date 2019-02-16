@@ -167,6 +167,7 @@ function markTaskIncomplete(task) {
   markBtn.textContent = 'Mark';
 }
 
+//TODO Fix creat to include new form and classes
 function createNewTask(titleText){
   //create all elements in a task
   let newTask = document.createElement('li');
@@ -183,17 +184,19 @@ function createNewTask(titleText){
   newTask.classList.add('task','active-state');
   newTaskToggleBtn.classList.add('js-mark-btn','task-btn','mark-btn');
   newTaskTitle.classList.add('js-task-title','task-title');
-  newTaskDisplay.classList.add('js-task-display','task-dispaly');
+  newTaskDisplay.classList.add('js-task-display','task-display');
   newTaskEditForm.classList.add('task-edit-form');
   newTaskEditInput.classList.add('task-edit-input');
   newTaskEditInput.setAttribute('type','text');
   newTaskEditBtn.classList.add('js-edit-btn','task-btn','edit-btn');
+  newTaskSaveBtn.classList.add('js-save-btn', 'save-btn', 'task-btn');
   newTaskDeleteBtn.classList.add('js-delete-btn','task-btn','delete-btn');
 
   //add text content to elements
   newTaskToggleBtn.textContent = 'Mark';
   newTaskTitle.textContent = titleText;
   newTaskEditBtn.textContent = 'Edit';
+  newTaskSaveBtn.textContent = 'Save';
   newTaskDeleteBtn.textContent = 'Delete';
 
   //build sub-components
@@ -205,10 +208,11 @@ function createNewTask(titleText){
 
   //build entire element
   newTask.appendChild(newTaskToggleBtn);
-  newTask.appendChild(newTaskTitle);
-  newTask.appendChild(newTaskEditInput);
-  newTask.appendChild(newTaskEditBtn);
+  newTask.appendChild(newTaskDisplay);
+  newTask.appendChild(newTaskEditForm);
   newTask.appendChild(newTaskDeleteBtn);
+
+  console.log(newTask);
 
   return newTask;
 }

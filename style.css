@@ -235,6 +235,11 @@ ACTIVE STATE
   justify-content: space-between;
 }
 
+.active-state .task-title {
+  
+  max-width: 200px;
+}
+
 .active-state,.edit-state {
   box-shadow: 0 10px 5px -6px rgba(119,119,119,0.6);
 }
@@ -309,7 +314,8 @@ EDIT STATE
 
 .edit-state .task-edit-input {
   width: 100%;
-}
+  border: none;
+  padding: 0;
 
 
 .edit-state .mark-btn {
